@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,11 @@ Route::get('register', function () {
 });
 
 Route::post('/register/add',[RegisterController::class , 'register'] )->name('register.add');
+
+Route::delete('/showData/delete/{id}',[userController::class , 'destroy'] )->name('user.delete');
+
+Route::get('/showData',[userController::class , 'showData'] )->name('user.data');
+
+
+
+
