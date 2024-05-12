@@ -23,27 +23,26 @@
     <div class="container">
         <div class="card card-form">
             <div class="card-body">
-                <h5 class="card-title text-center">Register</h5>
-                <form action="{{ route('register.add') }}" method="POST">
+                <h5 class="card-title text-center">Update</h5>
+                <form action="{{ route('user.update', $user->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{$user->name}}">
                     </div>
 
                     <div class="mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" name="email" placeholder="Email " value="{{$user->email}}">
                     </div>
-                    
-                    <div class="mb-3">
-                        <input type="password" class="form-control" name="pass" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary reg-btn">Submit</button>
+
+                    <button type="submit" class="btn btn-primary up-btn">Submit</button>
 
                     @if (session('success'))
                     <div class="alert alert-success mt-3" role="alert">
                         {{ session('success') }}
                     </div>
                     @endif
+                    
                     @if ($errors->any())
                     <div class="alert alert-danger mt-3" role="alert">
                         <ul>
@@ -62,20 +61,20 @@
 
 <script>
     $(document).ready(function() {
-        $('.reg-btn').click(function(event) {
+        $('.up-btn').click(function(event) {
             event.preventDefault();
             var form = $(this).closest('form');
             Swal.fire({
-                title: 'Are you sure you want to register?',
+                title: 'Are you sure you want to update?',
                 text: "This action is permanent!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, Register Successfully'
+                confirmButtonText: 'Yes, Update Successfully'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.fire('Registering...', '', 'info');
+                    Swal.fire('Updating...', '', 'info');
                     setTimeout(() => {
                         form.submit();
                     }, 1000); 

@@ -12,12 +12,14 @@
     <title>Document</title>
 </head>
 <body>
+
     <div class="container">
         @if (session('success'))
             <div class="alert alert-success mt-3" role="alert">
                 {{ session('success') }}
             </div>
     @endif
+    
     @if (session('delete'))
             <div class="alert alert-danger mt-3" role="alert">
                 {{ session('delete') }}
@@ -34,7 +36,7 @@
                 <th scope="col" class="col-2">ID</th>
                 <th scope="col" class="col-4">NAME</th>
                 <th scope="col" class="col-4">EMAIL</th>
-                <th scope="col" class="col-1">Action</th>
+                <th scope="col" class="col-2">Action</th>
             </tr>
         </thead>
 
@@ -44,18 +46,17 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
+                    
                     <td>
-                        <form action=" {{route('user.delete',$user->id)}}" method="POST" >
+                        <form action="{{ route('user.editform', $user->id) }}" method="GET" style="display: inline;">
                             @csrf
-                            @method('DELETE')
-
-                            <button class="btn btn-danger bt"> Delete</button>
+                            <button type="submit" class="btn btn-warning">Edit</button>
                         </form>
-                        <form action=" {{route('user.delete',$user->id)}}" method="POST" >
+
+                        <form action="{{ route('user.delete', $user->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
-
-                            <button class="btn btn-warning bt"> Edit</button>
+                            <button type="submit" class="btn btn-danger bt">Delete</button>
                         </form>
                     </td>
 
